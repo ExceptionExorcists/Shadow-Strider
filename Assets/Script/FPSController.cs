@@ -6,10 +6,7 @@ namespace Script {
         public Camera playerCamera;
         public float walkSpeed = 6.0f;
         public float runSpeed = 12.0f;
-        public float jumpPower = 7.0f;
         public float gravity = 10.0f;
-        public float lookSpeed = 2.0f;
-        public float lookXLimit = 45.0f;
         private Vector3 _moveDirection = Vector3.zero;
         private float _rotationX;
         public bool canMove = true;
@@ -35,19 +32,12 @@ namespace Script {
             bool isRunning = Input.GetKey(KeyCode.LeftShift);
             float curSpeedX = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Vertical") : 0;
             float curSpeedY = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Horizontal") : 0;
-            float movementDirectionY = _moveDirection.y;
             
             _moveDirection = forward * curSpeedX + right * curSpeedY;
             
             #endregion
 
             #region Handles Jumping
-
-            if (Input.GetButton("Jump") && canMove && _characterController.isGrounded) {
-                _moveDirection.y = jumpPower;
-            } else {
-                _moveDirection.y = movementDirectionY;
-            }
 
             if (!_characterController.isGrounded) {
                 _moveDirection.y -= gravity * Time.deltaTime;
