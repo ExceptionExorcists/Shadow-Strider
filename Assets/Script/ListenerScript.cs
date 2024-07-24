@@ -9,8 +9,15 @@ public class ListenerScript : MonoBehaviour
     public NavMeshAgent agent;
     States state;
 
-    public float minRoamingDistance;
     public float maxRoamingDistance;
+
+    public float attenuationRate;
+    public float huntNoise;
+    public float alertNoise;
+
+    public float baseSpeed;
+    public float speedIncreaseAmount;
+
 
     enum States {waiting, roaming, investigating, hunting}
 
@@ -55,6 +62,29 @@ public class ListenerScript : MonoBehaviour
                 state = States.waiting;
             }
         }
+        if(state == States.investigating)
+        {
+
+
+            if(agent.velocity.magnitude < 0.15f)
+            {
+                state = States.waiting;
+            }
+        }
+
         Debug.Log("State: " + state);
     }
+
+    public void InvestigateArea(Vector3 position, float strength)
+    {
+        float distance = Vector3.Distance(position, transform.position);
+        float noiseStrength = strength - attenuationRate * distance;
+        noiseStrength = Mathf.Clamp(noiseStrength, 0, noiseStrength);
+
+        state = States.investigating;
+        agent.SetDestination(position);
+
+    }
+
+
 }
