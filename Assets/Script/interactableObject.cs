@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class interactableObject : MonoBehaviour
 {
+    [SerializeField] private UnityEvent onInteraction;
+
     private bool inRange = false;
     // Start is called before the first frame update
     void Start()
@@ -16,9 +19,8 @@ public class interactableObject : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && inRange)
         {
-            Debug.Log("button pressed");
+            onInteraction.Invoke();
         }
-
     }
 
     private void OnTriggerStay(Collider other)
@@ -29,8 +31,6 @@ public class interactableObject : MonoBehaviour
             gameObject.GetComponent<Outline>().enabled = true;
             inRange = true;
         }
-
-
     }
 
     private void OnTriggerExit(Collider other)
@@ -41,4 +41,6 @@ public class interactableObject : MonoBehaviour
             inRange = false;
         }
     }
+
+
 }

@@ -12,10 +12,16 @@ namespace Script {
         public bool canMove = true;
         private CharacterController _characterController;
         private Vector3 _initialCameraPosition;
-        
-        
+        private int currSlot = 0;
+
+        public GameObject firecrackPrefab;
+        public GameObject glowstickPrefab;
+        public enum Items {empty, firecracker, glowstick}
+        public Items[] inventory;
         // Start is called before the first frame update
         private void Start() {
+            inventory = new Items[1];
+
             _characterController = GetComponent<CharacterController>();
             _initialCameraPosition = playerCamera.transform.position;
             _listenerScript = listener.GetComponent<ListenerScript>();
@@ -28,6 +34,22 @@ namespace Script {
             Rotation();
 
             UpdateCameraPosition();
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                switch (currSlot)
+                {
+                    case 0:
+                        currSlot = 1;
+                        //swap UI elements
+                        break;
+                    case 1:
+                        currSlot = 0;
+                        //swap UI elements
+                        break;
+                }
+            }
+
         }
 
         private void Move() {
@@ -60,5 +82,47 @@ namespace Script {
         private void UpdateCameraPosition() {
             playerCamera.transform.position = _initialCameraPosition + transform.position;
         }
+
+        public void GetItem(Items item)
+        {
+            if(inventory[currSlot] == Items.empty)
+            {
+                inventory[currSlot] = item;
+            }
+            else
+            {
+                DropItem(inventory[currSlot]);
+                inventory[currSlot] = item;
+            }
+        }
+
+        public void DropItem(Items item)
+        {
+            switch (item)
+            {
+                case Items.firecracker:
+                    Instantiate(firecrackPrefab, transform.position, transform.rotation);
+                    inventory[currSlot] = Items.empty;
+                    break;
+
+                case Items.glowstick:
+                    Instantiate(glowstickPrefab, transform.position, transform.rotation);
+                    inventory[currSlot] = Items.empty;
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        public void UseItem()
+        {
+            if(inventory[currSlot] != Items.empty)
+            {
+                //use item
+            }
+        }
+
+
     }
 }
