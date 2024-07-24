@@ -15,8 +15,6 @@ namespace Script {
         // Start is called before the first frame update
         private void Start() {
             _characterController = GetComponent<CharacterController>();
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
             _initialCameraPosition = playerCamera.transform.position;
         }
 
@@ -36,9 +34,8 @@ namespace Script {
             float curSpeedX = canMove ? walkSpeed * Input.GetAxis("Vertical") : 0;
             float curSpeedY = canMove ? walkSpeed * Input.GetAxis("Horizontal") : 0;
             
-            _moveDirection = (forward * curSpeedX + right * curSpeedY).normalized;
-
-            _moveDirection *= canMove ? walkSpeed : 0;
+            _moveDirection = forward * curSpeedX + right * curSpeedY;
+            
             _moveDirection.y = 0.0f;
 
             _characterController.Move(_moveDirection * Time.deltaTime);
