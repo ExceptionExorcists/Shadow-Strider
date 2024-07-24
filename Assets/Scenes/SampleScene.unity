@@ -465,13 +465,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 446391888}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.831}
+  m_LocalRotation: {x: -0.052474517, y: -0, z: -0, w: 0.9986223}
+  m_LocalPosition: {x: 0, y: -0.95, z: 0.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1601488454}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -6.016, y: 0, z: 0}
 --- !u!108 &446391890
 Light:
   m_ObjectHideFlags: 0
@@ -481,13 +481,13 @@ Light:
   m_GameObject: {fileID: 446391888}
   m_Enabled: 1
   serializedVersion: 10
-  m_Type: 2
+  m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
-  m_Range: 10
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
+  m_Range: 20
+  m_SpotAngle: 65.4
+  m_InnerSpotAngle: 17.435278
   m_CookieSize: 10
   m_Shadows:
     m_Type: 1
@@ -523,7 +523,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -612,7 +612,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 276704247}
-  - {fileID: 1679742249}
   - {fileID: 446391889}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -702,11 +701,11 @@ Transform:
   m_GameObject: {fileID: 1679742246}
   serializedVersion: 2
   m_LocalRotation: {x: 0.29263833, y: -0, z: -0, w: 0.95622325}
-  m_LocalPosition: {x: 0, y: 7.6299996, z: -15.79}
+  m_LocalPosition: {x: -0.56134653, y: 8.99, z: -14.767998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1601488454}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 34.032, y: 0, z: 0}
 --- !u!1 &1688244475
 GameObject:
@@ -927,3 +926,4 @@ SceneRoots:
   - {fileID: 262433776}
   - {fileID: 1981541814}
   - {fileID: 1601488454}
+  - {fileID: 1679742249}
