@@ -14,6 +14,7 @@ namespace Script {
         private float _rotationX;
         public bool canMove = true;
         private CharacterController _characterController;
+        private Vector3 _intialCameraPosition;
         
         
         // Start is called before the first frame update
@@ -21,14 +22,15 @@ namespace Script {
             _characterController = GetComponent<CharacterController>();
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            _intialCameraPosition = playerCamera.transform.position;
         }
 
         // Update is called once per frame
         private void Update() {
             #region Handles Movement
             
-            Vector3 forward = transform.TransformDirection(Vector3.forward);
-            Vector3 right = transform.TransformDirection(Vector3.right);
+            Vector3 forward = Vector3.forward;
+            Vector3 right = Vector3.right;
 
             bool isRunning = Input.GetKey(KeyCode.LeftShift);
             float curSpeedX = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Vertical") : 0;
@@ -58,13 +60,19 @@ namespace Script {
             _characterController.Move(_moveDirection * Time.deltaTime);
 
             if (!canMove) return;
-            
-            _rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
-            _rotationX = Mathf.Clamp(_rotationX, -lookXLimit, lookXLimit);
-            playerCamera.transform.localRotation = Quaternion.Euler(_rotationX, 0.0f, 0.0f);
-            transform.rotation *= Quaternion.Euler(0.0f, Input.GetAxis("Mouse X") * lookSpeed, 0.0f);
+
+            Ray cameraRay = playerCamera.ScreenPointToRay(Input.mousePosition);
+            Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+
+            if (groundPlane.Raycast(cameraRay, out float rayLength)) {
+                Vector3 pointToLook = cameraRay.GetPoint(rayLength);
+
+                transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
+            }
 
             #endregion
+            
+            playerCamera.transform.position = _intialCameraPosition + transform.position;
         }
     }
 }
