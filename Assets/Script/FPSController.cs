@@ -39,6 +39,7 @@ namespace Script {
             _moveDirection.y = 0.0f;
 
             _characterController.Move(_moveDirection * Time.deltaTime);
+
         }
 
         private void Rotation() {
