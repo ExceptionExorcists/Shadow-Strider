@@ -3,6 +3,8 @@ using UnityEngine;
 namespace Script {
     [RequireComponent(typeof(CharacterController))]
     public class FPSController : MonoBehaviour {
+        public GameObject listener;
+        private ListenerScript _listenerScript;
         public Camera playerCamera;
         public float walkSpeed = 6.0f;
         private Vector3 _moveDirection = Vector3.zero;
@@ -16,6 +18,7 @@ namespace Script {
         private void Start() {
             _characterController = GetComponent<CharacterController>();
             _initialCameraPosition = playerCamera.transform.position;
+            _listenerScript = listener.GetComponent<ListenerScript>();
         }
 
         // Update is called once per frame
@@ -39,6 +42,8 @@ namespace Script {
             _moveDirection.y = 0.0f;
 
             _characterController.Move(_moveDirection * Time.deltaTime);
+            
+            if (_moveDirection != Vector3.zero) _listenerScript.InvestigateArea(transform.position, gameObject, 10.0f, ListenerScript.NoiseStrength.Medium);
         }
 
         private void Rotation() {
