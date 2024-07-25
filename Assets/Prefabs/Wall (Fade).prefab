@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3254780947455775678}
   - component: {fileID: 2239350990191551464}
   m_Layer: 0
-  m_Name: Wall
+  m_Name: Wall (Fade)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

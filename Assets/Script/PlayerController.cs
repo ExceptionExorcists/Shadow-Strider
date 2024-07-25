@@ -24,7 +24,12 @@ namespace Script {
 
         private void UpdatePosition() {
             Vector3 forward = _camera.transform.TransformDirection(Vector3.forward);
+            forward.y = 0.0f;
+            forward.Normalize();
+            
             Vector3 right = _camera.transform.TransformDirection(Vector3.right);
+            right.y = 0.0f;
+            right.Normalize();
 
             float curSpeedX = walkSpeed * Input.GetAxis("Vertical");
             float curSpeedY = walkSpeed * Input.GetAxis("Horizontal");
