@@ -171,6 +171,9 @@ MonoBehaviour:
   playerCamera: {fileID: 0}
   walkSpeed: 6
   canMove: 1
+  firecrackPrefab: {fileID: 0}
+  glowstickPrefab: {fileID: 3935260123525094406, guid: 5aa8c562c708129469c6b01c81e2c0f4, type: 3}
+  inventory: 
 --- !u!1 &3755708857853250535
 GameObject:
   m_ObjectHideFlags: 0

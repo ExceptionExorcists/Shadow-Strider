@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5199532736411219815}
   - component: {fileID: -7539385306891666751}
   - component: {fileID: 89750767227733464}
+  - component: {fileID: 2183835660729423079}
   m_Layer: 0
   m_Name: glowstick
   m_TagString: Untagged
@@ -152,21 +153,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 029205515b6dcab48ba5ad03a330c30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onInteraction:
+  interationEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2322689568849628186, guid: 42e934042756006499544def9beefa33, type: 3}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
+      - m_Target: {fileID: 1530644320649781824, guid: 42e934042756006499544def9beefa33, type: 3}
+        m_TargetAssemblyTypeName: Script.FPSController, Assembly-CSharp
+        m_MethodName: GetItem
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: glowstick
           m_BoolArgument: 0
         m_CallState: 2
+  isInteractable: 1
+  isItem: 1
+  interactionRangeColor: {r: 1, g: 0.9685757, b: 0, a: 1}
+  defaultRangeColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &5199532736411219815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,7 +179,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3935260123525094406}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
@@ -220,6 +225,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f194eaa008ebfe74f8d85fdf814821e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  duration: 8
+  flickerTime: 6
+  flickerDuration: 0.2
+  flickerLowerIntensity: 2
+  flickerHigherIntensity: 4
+--- !u!208 &2183835660729423079
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3935260123525094406}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 40, y: 1, z: 40}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &4268383797362791782
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,24 +285,24 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4268383797362791782}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.19436097, g: 1, b: 0, a: 1}
-  m_Intensity: 1.99
+  m_Intensity: 4
   m_Range: 3.85
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_Bias: 0
+    m_NormalBias: 0.02
+    m_NearPlane: 0.04
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -298,7 +324,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295

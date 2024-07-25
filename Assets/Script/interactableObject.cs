@@ -5,30 +5,40 @@ using UnityEngine.Events;
 
 public class interactableObject : MonoBehaviour
 {
-    [SerializeField] private UnityEvent onInteraction;
+    public enum Items { empty, firecracker, glowstick }
 
+    public UnityEvent interationEvent;
+    public bool isInteractable = true;
+    public bool isItem;
     private bool inRange = false;
+    public Color interactionRangeColor;
+    public Color defaultRangeColor;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameObject.GetComponent<Outline>().OutlineColor = defaultRangeColor;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && inRange)
+        if (Input.GetKeyDown(KeyCode.E) && inRange && isInteractable)
         {
-            onInteraction.Invoke();
+            interationEvent.Invoke();
+            if (isItem)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("button:" +other.gameObject.tag);
-        if(other.gameObject.tag == "Player")
+        //Debug.Log("interaction range:" +other.gameObject.tag);
+        if(other.gameObject.tag == "Player" && isInteractable)
         {
-            gameObject.GetComponent<Outline>().enabled = true;
+            gameObject.GetComponent<Outline>().OutlineColor = interactionRangeColor;
             inRange = true;
         }
     }
@@ -37,10 +47,8 @@ public class interactableObject : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            gameObject.GetComponent<Outline>().enabled = false;
+            gameObject.GetComponent<Outline>().OutlineColor= defaultRangeColor;
             inRange = false;
         }
     }
-
-
 }

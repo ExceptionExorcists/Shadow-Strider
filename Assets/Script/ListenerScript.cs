@@ -26,7 +26,7 @@ public class ListenerScript : MonoBehaviour
     private void Update()
     {
         //click to direct enemy, for testing
-        if (Input.GetMouseButtonDown(0))
+        /*if (Input.GetMouseButtonDown(0))
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -35,7 +35,7 @@ public class ListenerScript : MonoBehaviour
             {
                 agent.SetDestination(hit.point);
             }
-        }
+        }*/
 
         switch (_state) {
             case States.Waiting:
