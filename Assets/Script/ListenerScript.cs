@@ -6,11 +6,14 @@ using Random = UnityEngine.Random;
 public class ListenerScript : MonoBehaviour
 {
     public Camera cam;
-    public NavMeshAgent agent;
+    private NavMeshAgent agent;
     public GameObject target;
+    public float huntingSpeed;
+    public float defaultSpeed;
     private States _state;
     public float maxRoamingDistance;
-    
+    public float huntingRange;
+    public float investigateRange;
     private enum States { Waiting, Roaming, Investigating, Hunting }
     
     public enum NoiseStrength { Low, Medium, High }
@@ -20,6 +23,7 @@ public class ListenerScript : MonoBehaviour
     private void Start()
     {
         _state = States.Waiting;
+        agent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
@@ -39,6 +43,7 @@ public class ListenerScript : MonoBehaviour
 
         switch (_state) {
             case States.Waiting:
+                agent.speed = defaultSpeed;
                 Vector3 randomDirection = Random.insideUnitSphere * maxRoamingDistance;
                 NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, maxRoamingDistance, 1);
                 Vector3 finalPosition = hit.position;
@@ -53,34 +58,51 @@ public class ListenerScript : MonoBehaviour
                 break;
             case States.Hunting:
                 agent.SetDestination(target.transform.position);
+                if (agent.velocity.magnitude < 0.15f) _state = States.Waiting;
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
-
         Debug.Log("State: " + _state);
     }
 
-    public void InvestigateArea(Vector3 position, GameObject gameObject, float radius, NoiseStrength strength) {
+    public void InvestigateArea(Vector3 position, GameObject huntTarget, NoiseStrength strength) {
         if (_state == States.Hunting) return;
-        
-        float distance = Vector3.Distance(position, transform.position);
-        if (distance > radius) return;
+
+        float radius = Vector3.Distance(transform.position, position);
 
         switch (strength) {
             case NoiseStrength.Low:
                 break;
             case NoiseStrength.Medium:
-                _state = States.Investigating;
-                agent.SetDestination(position);
+                if(radius < huntingRange)
+                {
+                    _state = States.Hunting;
+                    EnterHuntingState(position, huntTarget);
+                }
+                else
+                {
+                    if(radius < investigateRange)
+                    {
+                        _state = States.Investigating;
+                        agent.SetDestination(position);
+                    }
+                }
                 break;
             case NoiseStrength.High:
-                _state = States.Hunting;
-                target = gameObject;
+                EnterHuntingState(position, huntTarget);                
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(strength), strength, null);
         }
 
+    }
+
+    public void EnterHuntingState(Vector3 position, GameObject huntTarget)
+    {
+        _state = States.Hunting;
+        agent.SetDestination(position);
+        target = huntTarget;
+        agent.speed = huntingSpeed;
     }
 }

@@ -75,7 +75,7 @@ namespace Script {
 
             _characterController.Move(_moveDirection * Time.deltaTime);
             
-            if (_moveDirection != Vector3.zero) _listenerScript.InvestigateArea(transform.position, gameObject, 10.0f, ListenerScript.NoiseStrength.Medium);
+            if (_moveDirection != Vector3.zero) _listenerScript.InvestigateArea(transform.position, gameObject, ListenerScript.NoiseStrength.Medium);
         }
 
         private void Rotation() {
@@ -95,19 +95,13 @@ namespace Script {
 
         public void GetItem(string item)
         {
-            Items newItem;
-            switch (item)
+            var newItem = item switch
             {
-                case "glowstick":
-                    newItem = Items.glowstick;
-                    break;
-                case "firecracker":
-                    newItem = Items.firecracker;
-                    break;
-                default:
-                    newItem = Items.empty;
-                    break;
-            }
+                "glowstick" => Items.glowstick,
+                "firecracker" => Items.firecracker,
+                _ => Items.empty,
+            };
+
             if (inventory[currSlot] == Items.empty)
             {
                 inventory[currSlot] = newItem;
@@ -170,6 +164,7 @@ namespace Script {
             GameObject obj = Instantiate(prefab);
             obj.GetComponent<interactableObject>().isInteractable = false;
             obj.transform.position = transform.position;
+            obj.GetComponent<Outline>().enabled = false;
             Rigidbody rb = obj.GetComponent<Rigidbody>();
             rb.velocity = throwForce * transform.forward;
 
