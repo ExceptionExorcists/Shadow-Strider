@@ -99,6 +99,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 029205515b6dcab48ba5ad03a330c30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interationEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  isInteractable: 1
+  isItem: 0
+  interactionRangeColor: {r: 1, g: 0.96862745, b: 0, a: 1}
+  defaultRangeColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!54 &6672665107081729423
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Script {
     [RequireComponent(typeof(CharacterController))]
@@ -12,16 +13,20 @@ namespace Script {
         public bool canMove = true;
         private CharacterController _characterController;
         private Vector3 _initialCameraPosition;
-        private int currSlot = 0;
-
+   
+        //inventory
+        public static int currSlot = 0;
         public GameObject firecrackPrefab;
         public GameObject glowstickPrefab;
         public enum Items {empty, firecracker, glowstick}
-        public Items[] inventory;
+        [SerializeField]
+        public static List<Items> inventory;
+        public List<Items> inv;
+        public float throwForce;
+
         // Start is called before the first frame update
         private void Start() {
-            inventory = new Items[1];
-
+            inventory = new List<Items> { Items.empty, Items.empty };
             _characterController = GetComponent<CharacterController>();
             _initialCameraPosition = playerCamera.transform.position;
             _listenerScript = listener.GetComponent<ListenerScript>();
@@ -29,6 +34,7 @@ namespace Script {
 
         // Update is called once per frame
         private void Update() {
+            inv = inventory;
             Move();
 
             Rotation();
@@ -49,7 +55,11 @@ namespace Script {
                         break;
                 }
             }
-
+            //Use item
+            if (Input.GetMouseButtonDown(0))
+            {
+                UseItem();
+            }
         }
 
         private void Move() {
@@ -83,16 +93,33 @@ namespace Script {
             playerCamera.transform.position = _initialCameraPosition + transform.position;
         }
 
-        public void GetItem(Items item)
+        public void GetItem(string item)
         {
-            if(inventory[currSlot] == Items.empty)
+            Items newItem;
+            switch (item)
             {
-                inventory[currSlot] = item;
+                case "glowstick":
+                    newItem = Items.glowstick;
+                    break;
+                case "firecracker":
+                    newItem = Items.firecracker;
+                    break;
+                default:
+                    newItem = Items.empty;
+                    break;
             }
-            else
+            if (inventory[currSlot] == Items.empty)
+            {
+                inventory[currSlot] = newItem;
+            }
+            else if (inventory[(int)Mathf.Abs(currSlot - 1)] == Items.empty)
+            {
+                inventory[(int)Mathf.Abs(currSlot - 1)] = newItem;
+            }
+            else 
             {
                 DropItem(inventory[currSlot]);
-                inventory[currSlot] = item;
+                inventory[currSlot] = newItem;
             }
         }
 
@@ -101,12 +128,14 @@ namespace Script {
             switch (item)
             {
                 case Items.firecracker:
-                    Instantiate(firecrackPrefab, transform.position, transform.rotation);
+                    GameObject obj_f = Instantiate(firecrackPrefab);
+                    obj_f.transform.position = transform.position;
                     inventory[currSlot] = Items.empty;
                     break;
 
                 case Items.glowstick:
-                    Instantiate(glowstickPrefab, transform.position, transform.rotation);
+                    GameObject obj_g = Instantiate(glowstickPrefab);
+                    obj_g.transform.position = transform.position;
                     inventory[currSlot] = Items.empty;
                     break;
 
@@ -119,8 +148,32 @@ namespace Script {
         {
             if(inventory[currSlot] != Items.empty)
             {
-                //use item
+                switch (inventory[currSlot])
+                {
+                    case Items.firecracker:
+                        inventory[currSlot] = Items.empty;
+                        ThrowItem(firecrackPrefab);
+                        break;
+
+                    case Items.glowstick:
+                        inventory[currSlot] = Items.empty;
+                        GameObject obj = ThrowItem(glowstickPrefab);
+                        GameObject light = obj.transform.GetChild(0).gameObject;
+                        light.GetComponent<Light>().enabled = true;
+                        break;
+                }
             }
+        }
+
+        public GameObject ThrowItem(GameObject prefab)
+        {
+            GameObject obj = Instantiate(prefab);
+            obj.GetComponent<interactableObject>().isInteractable = false;
+            obj.transform.position = transform.position;
+            Rigidbody rb = obj.GetComponent<Rigidbody>();
+            rb.velocity = throwForce * transform.forward;
+
+            return obj;
         }
 
 
