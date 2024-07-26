@@ -7,32 +7,42 @@ namespace Script {
     public class WallhuggerController : MonoBehaviour {
         public enum State {
             Waiting,
-            Roaming
+            Roaming,
+            Hunting
         }
         
         public float maxRoamingDistance = 20.0f;
+        public State state = State.Waiting;
         
         private NavMeshAgent _agent;
-        private State _state = State.Waiting;
+        private Transform _playerTransform;
+
+        private WallhuggerController() {
+            GameManager.WallhuggerController = this;
+        }
 
         private void Awake() {
             _agent = GetComponent<NavMeshAgent>();
+            _playerTransform = GameManager.PlayerController.transform;
         }
 
         private void Update() {
-            switch (_state) {
+            switch (state) {
                 case State.Waiting:
                     Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * maxRoamingDistance;
                     NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, maxRoamingDistance, 1);
                     Vector3 finalPosition = hit.position;
                     _agent.SetDestination(finalPosition);
-                    _state = State.Roaming;
+                    state = State.Roaming;
                     break;
                 case State.Roaming:
                     bool reachedDestination = !_agent.pathPending && !_agent.isOnOffMeshLink &&
                                               (_agent.remainingDistance <= _agent.stoppingDistance ||
                                                _agent.velocity.magnitude < 0.15f);
-                    if (reachedDestination) _state = State.Waiting;
+                    if (reachedDestination) state = State.Waiting;
+                    break;
+                case State.Hunting:
+                    _agent.SetDestination(_playerTransform.position);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
