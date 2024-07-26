@@ -16,49 +16,56 @@ public class glowstickScript : MonoBehaviour
     private bool isOff = false;
     private float timer = 0.0f;
     private NavMeshObstacle nvo;
+    public bool used;
     // Start is called before the first frame update
     void Start()
     {
         glowLight = transform.GetChild(0).gameObject.GetComponent<Light>();
         nvo = gameObject.GetComponent<NavMeshObstacle>();
-        nvo.enabled = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        counter += Time.deltaTime;
-        if(counter > flickerTime && !isOff)
+        if (used)
         {
-            timer += Time.deltaTime;
+            if(!isOff) nvo.enabled = true;
 
-            if (!isFlickering)
+
+            counter += Time.deltaTime;
+            if (counter > flickerTime && !isOff)
             {
-                if(timer > flickerDuration)
+
+                timer += Time.deltaTime;
+
+                if (!isFlickering)
                 {
-                    isFlickering = true;
-                    timer = 0.0f;
-                    glowLight.intensity = flickerLowerIntensity;
-                    flickerDuration = Random.Range(0.01f, 0.2f);
+                    if(timer > flickerDuration)
+                    {
+                        isFlickering = true;
+                        timer = 0.0f;
+                        glowLight.intensity = flickerLowerIntensity;
+                        flickerDuration = Random.Range(0.01f, 0.2f);
+                    }
+                }
+                else
+                {
+                    if(timer > flickerDuration)
+                    {
+                        glowLight.intensity = flickerHigherIntensity;
+                        isFlickering = false;
+                        timer = 0.0f;
+                        flickerDuration = Random.Range(0.01f, 0.2f);
+
+                    }
                 }
             }
-            else
+            if(counter > duration && !isOff)
             {
-                if(timer > flickerDuration)
-                {
-                    glowLight.intensity = flickerHigherIntensity;
-                    isFlickering = false;
-                    timer = 0.0f;
-                    flickerDuration = Random.Range(0.01f, 0.2f);
-
-                }
+                glowLight.enabled = false;
+                isOff = true;
+                nvo.enabled = false;
             }
-        }
-        if(counter > duration && !isOff)
-        {
-            glowLight.enabled = false;
-            isOff = true;
-            nvo.enabled = false;
         }
     }
 }

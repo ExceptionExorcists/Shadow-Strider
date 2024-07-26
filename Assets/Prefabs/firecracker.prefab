@@ -241,6 +241,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b292a2b5744b91345a221b707fb5e726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  duration: 4
+  particles: {fileID: 8606373247815654667, guid: 63e5740f9486a694e855fd108713c1cf, type: 3}
+  sparkDuration: 0.1
+  waitDuration: 0.2
 --- !u!1 &4268383797362791782
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,7 +289,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.48584908, g: 1, b: 0.93928593, a: 1}
-  m_Intensity: 4
+  m_Intensity: 15
   m_Range: 3.85
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208

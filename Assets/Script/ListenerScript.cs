@@ -19,9 +19,11 @@ public class ListenerScript : MonoBehaviour
     public enum NoiseStrength { Low, Medium, High }
 
     private Transform _roamingTowards;
+    private Animator animator;
     // Start is called before the first frame update
     private void Start()
     {
+        animator = GetComponent<Animator>();
         _state = States.Waiting;
         agent = GetComponent<NavMeshAgent>();
     }
@@ -58,7 +60,11 @@ public class ListenerScript : MonoBehaviour
                 break;
             case States.Hunting:
                 agent.SetDestination(target.transform.position);
-                if (agent.velocity.magnitude < 0.15f) _state = States.Waiting;
+                if (agent.velocity.magnitude < 0.15f)
+                {
+                    _state = States.Waiting;
+                    animator.SetBool("Hunting", false);
+                }
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -100,7 +106,8 @@ public class ListenerScript : MonoBehaviour
 
     public void EnterHuntingState(Vector3 position, GameObject huntTarget)
     {
-        _state = States.Hunting;
+        animator.SetBool("Hunting", true);
+           _state = States.Hunting;
         agent.SetDestination(position);
         target = huntTarget;
         agent.speed = huntingSpeed;

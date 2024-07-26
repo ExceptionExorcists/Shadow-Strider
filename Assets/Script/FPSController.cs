@@ -146,12 +146,14 @@ namespace Script {
                 {
                     case Items.firecracker:
                         inventory[currSlot] = Items.empty;
-                        ThrowItem(firecrackPrefab);
+                        GameObject fckr = ThrowItem(firecrackPrefab);
+                        fckr.GetComponent<firecrackerScript>().UseFireCracker();
                         break;
 
                     case Items.glowstick:
                         inventory[currSlot] = Items.empty;
                         GameObject obj = ThrowItem(glowstickPrefab);
+                        obj.GetComponent<glowstickScript>().used = true;
                         GameObject light = obj.transform.GetChild(0).gameObject;
                         light.GetComponent<Light>().enabled = true;
                         break;
