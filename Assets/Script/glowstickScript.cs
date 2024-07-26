@@ -31,7 +31,6 @@ public class glowstickScript : MonoBehaviour
         {
             if(!isOff) nvo.enabled = true;
 
-
             counter += Time.deltaTime;
             if (counter > flickerTime && !isOff)
             {

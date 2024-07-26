@@ -20,9 +20,17 @@ public class ListenerScript : MonoBehaviour
 
     private Transform _roamingTowards;
     private Animator animator;
+
+    public AudioClip growlClip;
+    public AudioClip screachClip;
+    private AudioSource AS;
+    private bool isPlayingAudio = false;
+    private float audioTimer;
+    public float auidoCooldown;
     // Start is called before the first frame update
     private void Start()
     {
+        AS = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         _state = States.Waiting;
         agent = GetComponent<NavMeshAgent>();
@@ -60,6 +68,7 @@ public class ListenerScript : MonoBehaviour
                 break;
             case States.Hunting:
                 agent.SetDestination(target.transform.position);
+                PlayAudioClip(screachClip);
                 if (agent.velocity.magnitude < 0.15f)
                 {
                     _state = States.Waiting;
@@ -70,6 +79,12 @@ public class ListenerScript : MonoBehaviour
                 throw new ArgumentOutOfRangeException();
         }
         Debug.Log("State: " + _state);
+
+        audioTimer += Time.deltaTime;
+        if(audioTimer > auidoCooldown)
+        {
+            isPlayingAudio = false;
+        }
     }
 
     public void InvestigateArea(Vector3 position, GameObject huntTarget, NoiseStrength strength) {
@@ -92,6 +107,7 @@ public class ListenerScript : MonoBehaviour
                     {
                         _state = States.Investigating;
                         agent.SetDestination(position);
+                        PlayAudioClip(growlClip);
                     }
                 }
                 break;
@@ -111,5 +127,16 @@ public class ListenerScript : MonoBehaviour
         agent.SetDestination(position);
         target = huntTarget;
         agent.speed = huntingSpeed;
+        
+    }
+
+    public void PlayAudioClip(AudioClip ac)
+    {
+        if (!isPlayingAudio)
+        {
+            AS.PlayOneShot(ac);
+            isPlayingAudio = true;
+            audioTimer = 0.0f;
+        }
     }
 }
