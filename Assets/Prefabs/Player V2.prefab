@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -8685552776747932555}
   - component: {fileID: 1478079892707574979}
   - component: {fileID: -1111403026574741920}
+  - component: {fileID: 4513123010207179095}
   m_Layer: 0
   m_Name: Player V2
   m_TagString: Untagged
@@ -125,6 +126,23 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4513123010207179095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951244775824244973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5ddc7a663125274da87acaeec5d1a02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listener: {fileID: 1682451050012223171, guid: 2cca34bb09712a143898aa31cdc84c14, type: 3}
+  firecrackPrefab: {fileID: 3935260123525094406, guid: 28d0760d7acdf2546a1a828819bd6daa, type: 3}
+  glowstickPrefab: {fileID: 3935260123525094406, guid: 5aa8c562c708129469c6b01c81e2c0f4, type: 3}
+  inv: 
+  throwForce: 8
 --- !u!1 &1186576362475645311
 GameObject:
   m_ObjectHideFlags: 0
