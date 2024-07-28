@@ -6,6 +6,7 @@ Shader "Custom/PostProcessing"
         _PixelSize ("Pixel Size", Float) = 8.0
         _NoiseTex ("Noise Texture", 2D) = "white" {}
         _GritIntensity ("Grit Intensity", Float) = 0.5
+        _EdgeSoftness ("Edge Softness", Float) = 0.1
     }
     SubShader
     {
@@ -35,6 +36,7 @@ Shader "Custom/PostProcessing"
             sampler2D _NoiseTex;
             float _PixelSize;
             float _GritIntensity;
+            float _EdgeSoftness;
 
             v2f vert(appdata v)
             {
@@ -51,12 +53,23 @@ Shader "Custom/PostProcessing"
                 pixelUV = floor(pixelUV) / _PixelSize;
 
                 fixed4 sceneColor = tex2D(_MainTex, pixelUV);
+
+                float2 offset = 1.0 / _PixelSize;
+                fixed4 neighborColor = (
+                    tex2D(_MainTex, pixelUV + float2(-offset.x, 0)) +
+                    tex2D(_MainTex, pixelUV + float2(offset.x, 0)) +
+                    tex2D(_MainTex, pixelUV + float2(0, -offset.y)) +
+                    tex2D(_MainTex, pixelUV + float2(0, offset.y))
+                ) / 4.0;
+
+                fixed4 finalColor = lerp(sceneColor, neighborColor, _EdgeSoftness);
+
                 fixed4 noiseColor = tex2D(_NoiseTex, i.uv);
                 float noiseEffect = 1.0 + noiseColor.r * _GritIntensity;
 
-                sceneColor.rgb *= noiseEffect;
+                finalColor.rgb *= noiseEffect;
 
-                return sceneColor;
+                return finalColor;
             }
             ENDCG
         }
