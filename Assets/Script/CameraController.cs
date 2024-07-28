@@ -12,7 +12,7 @@ namespace Script {
 
         private void Start() {
             _targetTransform = GameManager.PlayerController.transform;
-            _defaultPosition = transform.position;
+            _defaultPosition = transform.position + new Vector3(45.0f, 0.0f, 0.0f);
             _fadeoutLayerMask = 1 << LayerMask.NameToLayer("Fadeout");
         }
 
