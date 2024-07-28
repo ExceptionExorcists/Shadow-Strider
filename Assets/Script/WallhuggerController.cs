@@ -10,18 +10,24 @@ namespace Script {
             Roaming,
             Hunting
         }
-        
+
+        public int id = 1;
         public float maxRoamingDistance = 20.0f;
         public State state = State.Waiting;
         
         private NavMeshAgent _agent;
         private Transform _playerTransform;
 
-        private WallhuggerController() {
-            GameManager.WallhuggerController = this;
-        }
-
         private void Awake() {
+            switch (id) {
+                case 1:
+                    GameManager.WallhuggerController1 = this;
+                    break;
+                case 2:
+                    GameManager.WallhuggerController2 = this;
+                    break;
+            }
+            
             _agent = GetComponent<NavMeshAgent>();
             _playerTransform = GameManager.PlayerController.transform;
         }
