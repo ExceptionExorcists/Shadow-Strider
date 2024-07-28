@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 1256953472942792741}
   - component: {fileID: 3646994896181720384}
   - component: {fileID: 7371527341185250212}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Hunt Zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
