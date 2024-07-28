@@ -5,7 +5,6 @@ using Random = UnityEngine.Random;
 
 public class ListenerScript : MonoBehaviour
 {
-    public Camera cam;
     private NavMeshAgent agent;
     public GameObject target;
     public float huntingSpeed;

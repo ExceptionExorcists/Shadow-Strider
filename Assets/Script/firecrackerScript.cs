@@ -17,6 +17,9 @@ public class firecrackerScript : MonoBehaviour
     private Light _light;
     private NavMeshObstacle _nvMeshObs;
     private AudioSource _as;
+
+    public GameObject listener;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +48,7 @@ public class firecrackerScript : MonoBehaviour
                         _light.enabled = true;
                         _as.pitch = Random.Range(0.5f, 1.5f);
                         _as.Play();
+                        listener.GetComponent<ListenerScript>().InvestigateArea(transform.position, gameObject, ListenerScript.NoiseStrength.High);
                     }
                 }
                 else
