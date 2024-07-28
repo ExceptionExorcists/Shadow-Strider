@@ -14,15 +14,15 @@ public class firecrackerScript : MonoBehaviour
     public float sparkDuration;
     public float waitDuration;
     private float timer = 0.0f;
-    private Light light;
-    private NavMeshObstacle nvMeshObs;
-    private AudioSource AS;
+    private Light _light;
+    private NavMeshObstacle _nvMeshObs;
+    private AudioSource _as;
     // Start is called before the first frame update
     void Start()
     {
-        AS = GetComponent<AudioSource>();
-        nvMeshObs = GetComponent<NavMeshObstacle>();
-        light = transform.GetChild(0).gameObject.GetComponent<Light>();
+        _as = GetComponent<AudioSource>();
+        _nvMeshObs = GetComponent<NavMeshObstacle>();
+        _light = transform.GetChild(0).gameObject.GetComponent<Light>();
     }
 
     // Update is called once per frame
@@ -33,7 +33,7 @@ public class firecrackerScript : MonoBehaviour
 
             if (counter < duration)
             {
-                nvMeshObs.enabled = true;
+                _nvMeshObs.enabled = true;
 
                 timer += Time.deltaTime;
                 if (!sparking)
@@ -42,9 +42,9 @@ public class firecrackerScript : MonoBehaviour
                     {
                         sparking = true;
                         timer = 0.0f;
-                        light.enabled = true;
-                        AS.pitch = Random.Range(0.5f, 1.5f);
-                        AS.Play();
+                        _light.enabled = true;
+                        _as.pitch = Random.Range(0.5f, 1.5f);
+                        _as.Play();
                     }
                 }
                 else
@@ -53,7 +53,7 @@ public class firecrackerScript : MonoBehaviour
                     {
                         sparking = false;
                         timer = 0.0f;
-                        light.enabled = false;
+                        _light.enabled = false;
                     }
                 }
 
@@ -61,8 +61,8 @@ public class firecrackerScript : MonoBehaviour
             }
             else
             {
-                light.enabled = false;
-                nvMeshObs.enabled = false;
+                _light.enabled = false;
+                _nvMeshObs.enabled = false;
             }
         }
     }

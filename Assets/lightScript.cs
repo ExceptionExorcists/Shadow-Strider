@@ -17,16 +17,16 @@ public class lightScript : MonoBehaviour
     private float newFlickerIntensity;
     public float defaultLightIntensity = 2.5f;
     public float minLightIntensity = 1.0f;
-    private Light light;
-    private NavMeshObstacle nvMO;
+    private Light _light;
+    private NavMeshObstacle _nvMo;
     public bool isOn;
 
     // Start is called before the first frame update
     void Start()
     {
         FlickerPrep();
-        light = GetComponent<Light>();
-        nvMO = GetComponent<NavMeshObstacle>();
+        _light = GetComponent<Light>();
+        _nvMo = GetComponent<NavMeshObstacle>();
     }
 
     // Update is called once per frame
@@ -34,24 +34,24 @@ public class lightScript : MonoBehaviour
     {
         if (isOn)
         {
-            light.enabled = true;
-            nvMO.enabled = true;
+            _light.enabled = true;
+            _nvMo.enabled = true;
             counter += Time.deltaTime;
             if (counter > cooldown)
             {
                 timer += Time.deltaTime;
-                light.intensity = newFlickerIntensity;
+                _light.intensity = newFlickerIntensity;
                 if (timer > flickerDuration)
                 {
-                    light.intensity = defaultLightIntensity;
+                    _light.intensity = defaultLightIntensity;
                     FlickerPrep();
                 }
             }
         }
         else
         {
-            light.enabled = false;
-            nvMO.enabled = false;
+            _light.enabled = false;
+            _nvMo.enabled = false;
         }
 
     }
