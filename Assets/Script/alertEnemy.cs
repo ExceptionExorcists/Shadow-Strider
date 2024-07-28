@@ -24,7 +24,7 @@ public class alertEnemy : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             Debug.Log("alert!");
-            listener.GetComponent<ListenerScript>().InvestigateArea(transform.position, gameObject, 10.0f, ListenerScript.NoiseStrength.High);
+            listener.GetComponent<ListenerScript>().InvestigateArea(transform.position, gameObject, ListenerScript.NoiseStrength.High);
         }
     }
 }
