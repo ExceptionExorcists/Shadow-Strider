@@ -9,6 +9,9 @@ namespace Script {
         private CharacterController _characterController;
         private Animator anim;
 
+        private ListenerScript _listenerScript;
+        public GameObject listener;
+
         private PlayerController() {
             GameManager.PlayerController = this;
         }
@@ -17,6 +20,8 @@ namespace Script {
             _camera = Camera.main;
             _characterController = GetComponent<CharacterController>();
             anim = GetComponent<Animator>();
+            _listenerScript = listener.GetComponent<ListenerScript>();
+
         }
 
         private void Update() {
@@ -52,7 +57,7 @@ namespace Script {
 
             _characterController.Move(moveDirection * Time.deltaTime);
 
-
+            if (moveDirection != Vector3.zero) _listenerScript.InvestigateArea(transform.position, gameObject, ListenerScript.NoiseStrength.Medium);
         }
 
         private void UpdateRotation() {
