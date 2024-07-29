@@ -176,7 +176,7 @@ MonoBehaviour:
   investigateRange: 15
   growlClip: {fileID: 8300000, guid: b74317cda2713ee47b591728d682d3bd, type: 3}
   screachClip: {fileID: 8300000, guid: b9fe35ad34d1b224ba3a0ea5186ee159, type: 3}
-  clipDuration: 0.8
+  clipDuration: 0.5
   auidoCooldown: 4
 --- !u!195 &4748804768270237760
 NavMeshAgent:
@@ -191,7 +191,7 @@ NavMeshAgent:
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 360
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
