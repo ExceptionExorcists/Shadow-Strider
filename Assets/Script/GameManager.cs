@@ -8,6 +8,8 @@ namespace Script {
         public static WallhuggerController WallhuggerController1 { get; set; }
         public static WallhuggerController WallhuggerController2 { get; set; }
 
+        public static ListenerScript ListenerScript{ get; set; }
+
         private GameManager() {
             Instance = this;
         }

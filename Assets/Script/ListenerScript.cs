@@ -30,6 +30,12 @@ public class ListenerScript : MonoBehaviour
     private bool isPlayingAudio = false;
     private float audioTimer;
     public float auidoCooldown;
+
+    private ListenerScript()
+    {
+        GameManager.ListenerScript = this;
+    }
+
     // Start is called before the first frame update
     private void Start()
     {
