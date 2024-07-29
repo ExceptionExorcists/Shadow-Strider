@@ -4026,6 +4026,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wallhugger
       objectReference: {fileID: 0}
+    - target: {fileID: 826710127305326545, guid: cb3d7bf7e705f9348bf8b60725490702, type: 3}
+      propertyPath: maxRoamingDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1310813677356876673, guid: cb3d7bf7e705f9348bf8b60725490702, type: 3}
+      propertyPath: m_Speed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6952024438122000067, guid: cb3d7bf7e705f9348bf8b60725490702, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.185
