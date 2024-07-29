@@ -23,6 +23,9 @@ public class ListenerScript : MonoBehaviour
 
     public AudioClip growlClip;
     public AudioClip screachClip;
+    public AudioClip walkingClip;
+    public float clipDuration;
+    private float timer;
     private AudioSource AS;
     private bool isPlayingAudio = false;
     private float audioTimer;
@@ -50,6 +53,17 @@ public class ListenerScript : MonoBehaviour
                 agent.SetDestination(hit.point);
             }
         }*/
+
+        timer += Time.deltaTime;
+        if(timer > clipDuration)
+        {
+            if (!isPlayingAudio)
+            {
+                AS.pitch = Random.Range(0.8f, 1.2f);
+            }
+            AS.Play();
+            timer = 0;
+        }
 
         switch (_state) {
             case States.Waiting:

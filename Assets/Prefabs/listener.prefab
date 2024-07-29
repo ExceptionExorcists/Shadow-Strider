@@ -168,7 +168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b6264c2952b1cb4ea58ad0111d9c73b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
   target: {fileID: 0}
   huntingSpeed: 10
   defaultSpeed: 4
@@ -177,6 +176,7 @@ MonoBehaviour:
   investigateRange: 10
   growlClip: {fileID: 8300000, guid: b74317cda2713ee47b591728d682d3bd, type: 3}
   screachClip: {fileID: 8300000, guid: b9fe35ad34d1b224ba3a0ea5186ee159, type: 3}
+  auidoCooldown: 0
 --- !u!195 &4748804768270237760
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -197,7 +197,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 1
   m_BaseOffset: 0
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!135 &3229646185986678696
 SphereCollider:
@@ -231,7 +231,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

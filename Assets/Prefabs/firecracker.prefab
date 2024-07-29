@@ -157,8 +157,8 @@ MonoBehaviour:
   interationEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1530644320649781824, guid: 42e934042756006499544def9beefa33, type: 3}
-        m_TargetAssemblyTypeName: Script.FPSController, Assembly-CSharp
+      - m_Target: {fileID: 7681641207618975952, guid: da48899648e6e564ab56a9d6ad1ffe5d, type: 3}
+        m_TargetAssemblyTypeName: PlayerInventory, Assembly-CSharp
         m_MethodName: GetItem
         m_Mode: 5
         m_Arguments:
@@ -246,6 +246,7 @@ MonoBehaviour:
   particles: {fileID: 8606373247815654667, guid: 63e5740f9486a694e855fd108713c1cf, type: 3}
   sparkDuration: 0.1
   waitDuration: 0.2
+  listener: {fileID: 1682451050012223171, guid: 2cca34bb09712a143898aa31cdc84c14, type: 3}
 --- !u!82 &-3877131300805715731
 AudioSource:
   m_ObjectHideFlags: 0
