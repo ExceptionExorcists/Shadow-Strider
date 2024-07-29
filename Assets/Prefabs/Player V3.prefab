@@ -502,7 +502,6 @@ GameObject:
   - component: {fileID: 869790113899040518}
   - component: {fileID: 6636591230928574136}
   - component: {fileID: 7681641207618975952}
-  - component: {fileID: 130168596328498052}
   - component: {fileID: 3537079745418024842}
   m_Layer: 0
   m_Name: Player V3
@@ -590,7 +589,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 6
   walkingClip: {fileID: 8300000, guid: 58cdd5991b828f54c9dbbc985363b02e, type: 3}
-  clipDuration: 1.5
+  clipDuration: 0.4
   listener: {fileID: 0}
 --- !u!114 &7681641207618975952
 MonoBehaviour:
@@ -609,14 +608,6 @@ MonoBehaviour:
   glowstickPrefab: {fileID: 3935260123525094406, guid: 5aa8c562c708129469c6b01c81e2c0f4, type: 3}
   inv: 
   throwForce: 8
---- !u!81 &130168596328498052
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5545545575462988650}
-  m_Enabled: 1
 --- !u!82 &3537079745418024842
 AudioSource:
   m_ObjectHideFlags: 0
@@ -673,7 +664,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
