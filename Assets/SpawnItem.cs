@@ -9,7 +9,6 @@ public class SpawnItem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(Items.Count);
         int item = Random.Range(0, Items.Count);
         GameObject spawnedItem = Instantiate(Items[item]);
         spawnedItem.transform.position = transform.position;
