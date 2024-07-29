@@ -7,6 +7,7 @@ Shader "Custom/PostProcessing"
         _NoiseTex ("Noise Texture", 2D) = "white" {}
         _GritIntensity ("Grit Intensity", Float) = 0.5
         _EdgeSoftness ("Edge Softness", Float) = 0.1
+        _PulseEffect ("Pulse Effect", Float) = 0.0
     }
     SubShader
     {
@@ -37,6 +38,7 @@ Shader "Custom/PostProcessing"
             float _PixelSize;
             float _GritIntensity;
             float _EdgeSoftness;
+            float _PulseEffect;
 
             v2f vert(appdata v)
             {
@@ -62,7 +64,8 @@ Shader "Custom/PostProcessing"
                     tex2D(_MainTex, pixelUV + float2(0, offset.y))
                 ) / 4.0;
 
-                fixed4 finalColor = lerp(sceneColor, neighborColor, _EdgeSoftness);
+                float pulsingEdgeSoftness = _EdgeSoftness + sin(_Time.y * 3.14 * 2) * _PulseEffect;
+                fixed4 finalColor = lerp(sceneColor, neighborColor, pulsingEdgeSoftness);
 
                 fixed4 noiseColor = tex2D(_NoiseTex, i.uv);
                 float noiseEffect = 1.0 + noiseColor.r * _GritIntensity;

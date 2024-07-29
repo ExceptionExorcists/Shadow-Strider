@@ -1,4 +1,5 @@
 using System;
+using Script;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -72,6 +73,7 @@ public class ListenerScript : MonoBehaviour
                 {
                     _state = States.Waiting;
                     animator.SetBool("Hunting", false);
+                    PostProcessing.Instance.effectMaterial.SetFloat("_PulseEffect", 0.0f);
                 }
                 break;
             default:
@@ -126,7 +128,7 @@ public class ListenerScript : MonoBehaviour
         agent.SetDestination(position);
         target = huntTarget;
         agent.speed = huntingSpeed;
-        
+        PostProcessing.Instance.effectMaterial.SetFloat("_PulseEffect", 0.5f);
     }
 
     public void PlayAudioClip(AudioClip ac)

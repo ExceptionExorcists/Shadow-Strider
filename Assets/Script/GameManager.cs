@@ -11,7 +11,9 @@ namespace Script {
         private GameManager() {
             Instance = this;
         }
-        
-        public static void Reset() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+        public static void Reset() {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }
