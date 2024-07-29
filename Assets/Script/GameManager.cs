@@ -12,6 +12,6 @@ namespace Script {
             Instance = this;
         }
         
-        public void Reset() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        public static void Reset() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
