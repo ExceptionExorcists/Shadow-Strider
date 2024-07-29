@@ -607,7 +607,11 @@ MonoBehaviour:
   firecrackPrefab: {fileID: 3935260123525094406, guid: 28d0760d7acdf2546a1a828819bd6daa, type: 3}
   glowstickPrefab: {fileID: 3935260123525094406, guid: 5aa8c562c708129469c6b01c81e2c0f4, type: 3}
   inv: 
-  throwForce: 8
+  throwForce: 16
+  glowStickSprite: {fileID: 21300000, guid: c2aa5fa114aeb374fad7d680093a5242, type: 3}
+  firecrackerSprite: {fileID: 21300000, guid: 270db0f28fec6c54c9d80d18574fad34, type: 3}
+  transparentInv: {r: 1, g: 1, b: 1, a: 0}
+  visibleInv: {r: 1, g: 1, b: 1, a: 1}
 --- !u!82 &3537079745418024842
 AudioSource:
   m_ObjectHideFlags: 0

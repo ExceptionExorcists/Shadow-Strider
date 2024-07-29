@@ -170,13 +170,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   huntingSpeed: 10
-  defaultSpeed: 4
+  defaultSpeed: 6
   maxRoamingDistance: 90
-  huntingRange: 5
-  investigateRange: 10
+  huntingRange: 6
+  investigateRange: 15
   growlClip: {fileID: 8300000, guid: b74317cda2713ee47b591728d682d3bd, type: 3}
   screachClip: {fileID: 8300000, guid: b9fe35ad34d1b224ba3a0ea5186ee159, type: 3}
-  walkingClip: {fileID: 0}
   clipDuration: 0.8
   auidoCooldown: 4
 --- !u!195 &4748804768270237760

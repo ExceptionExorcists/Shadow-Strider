@@ -23,7 +23,6 @@ public class ListenerScript : MonoBehaviour
 
     public AudioClip growlClip;
     public AudioClip screachClip;
-    public AudioClip walkingClip;
     public float clipDuration;
     private float timer;
     private AudioSource AS;
