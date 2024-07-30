@@ -3786,7 +3786,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 942935914587592026, guid: 375c15e5dd96f23458e9a3985da17f43, type: 3}
       propertyPath: m_VoxelSize
-      value: 0.16333334
+      value: 0.06333333
       objectReference: {fileID: 0}
     - target: {fileID: 942935914587592026, guid: 375c15e5dd96f23458e9a3985da17f43, type: 3}
       propertyPath: m_NavMeshData
@@ -3794,7 +3794,7 @@ PrefabInstance:
       objectReference: {fileID: 23800000, guid: 3b13eab8861e5624e82a21d248f8d6b9, type: 2}
     - target: {fileID: 2022909814534540202, guid: 375c15e5dd96f23458e9a3985da17f43, type: 3}
       propertyPath: m_VoxelSize
-      value: 0.16333334
+      value: 0.06333333
       objectReference: {fileID: 0}
     - target: {fileID: 2022909814534540202, guid: 375c15e5dd96f23458e9a3985da17f43, type: 3}
       propertyPath: m_NavMeshData
@@ -3802,7 +3802,7 @@ PrefabInstance:
       objectReference: {fileID: 23800000, guid: 722f0b64e8706084eb82e4c12abb92b2, type: 2}
     - target: {fileID: 3914247368947881950, guid: 375c15e5dd96f23458e9a3985da17f43, type: 3}
       propertyPath: m_VoxelSize
-      value: 0.16333334
+      value: 0.06333333
       objectReference: {fileID: 0}
     - target: {fileID: 3914247368947881950, guid: 375c15e5dd96f23458e9a3985da17f43, type: 3}
       propertyPath: m_NavMeshData
@@ -3850,7 +3850,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6966764083431852310, guid: 375c15e5dd96f23458e9a3985da17f43, type: 3}
       propertyPath: m_VoxelSize
-      value: 0.16333334
+      value: 0.06333333
       objectReference: {fileID: 0}
     - target: {fileID: 6966764083431852310, guid: 375c15e5dd96f23458e9a3985da17f43, type: 3}
       propertyPath: m_NavMeshData
