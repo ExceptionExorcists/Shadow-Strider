@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Script {
     [RequireComponent(typeof(CharacterController))]
@@ -17,6 +18,13 @@ namespace Script {
         private ListenerScript _listenerScript;
         public GameObject listener;
 
+        private Light flashLight;
+        private bool isListenerHunting;
+        public float lightFlickerDuration;
+        private float defaultLightIntensity;
+        private float counter;
+        private bool inFlickerLow = false;
+
         private PlayerController() {
             GameManager.PlayerController = this;
         }
@@ -27,11 +35,36 @@ namespace Script {
             anim = GetComponent<Animator>();
             _listenerScript = listener.GetComponent<ListenerScript>();
             AS = GetComponent<AudioSource>();
+            flashLight = transform.Find("Flashlight").gameObject.GetComponent<Light>();
+            defaultLightIntensity = flashLight.intensity;
         }
 
         private void Update() {
             UpdatePosition();
             UpdateRotation();
+
+            isListenerHunting = (GameManager.ListenerScript._state == ListenerScript.States.Hunting);
+            if (isListenerHunting)
+            {
+                flashLight.GetComponent<NavMeshObstacle>().enabled = false;
+                counter += Time.deltaTime;
+                if(counter > lightFlickerDuration && !inFlickerLow)
+                {
+                    flashLight.intensity = Random.Range(defaultLightIntensity / 2, defaultLightIntensity);
+                    counter = 0;
+                    inFlickerLow = true;
+                }
+                else if(counter > lightFlickerDuration && inFlickerLow)
+                {
+                    counter = 0;
+                    inFlickerLow = false;
+                }
+            }
+            else
+            {
+                flashLight.GetComponent<NavMeshObstacle>().enabled = true;
+                flashLight.intensity = defaultLightIntensity;
+            }
         }
 
         private void UpdatePosition() {

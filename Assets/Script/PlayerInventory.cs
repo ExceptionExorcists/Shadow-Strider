@@ -31,10 +31,7 @@ public class PlayerInventory : MonoBehaviour
         GameObject invUI = GameObject.Find("WelcomeScreen");
         invSlot1 = invUI.transform.Find("item_slot1").gameObject.GetComponent<Image>();
         invSlot2 = invUI.transform.Find("item_slot2").gameObject.GetComponent<Image>();
-        Debug.Log(invSlot1);
-        Debug.Log(invSlot2);
         UpdateInventoryUI();
-
     }
 
     // Update is called once per frame

@@ -10,11 +10,11 @@ public class ListenerScript : MonoBehaviour
     public GameObject target;
     public float huntingSpeed;
     public float defaultSpeed;
-    private States _state;
+    public States _state;
     public float maxRoamingDistance;
     public float huntingRange;
     public float investigateRange;
-    private enum States { Waiting, Roaming, Investigating, Hunting }
+    public enum States { Waiting, Roaming, Investigating, Hunting }
     
     public enum NoiseStrength { Low, Medium, High }
 
@@ -29,6 +29,9 @@ public class ListenerScript : MonoBehaviour
     private bool isPlayingAudio = false;
     private float audioTimer;
     public float auidoCooldown;
+    private bool isPlayingHunting;
+
+    public float huntDistanceMargin;
 
     private ListenerScript()
     {
@@ -79,6 +82,7 @@ public class ListenerScript : MonoBehaviour
                 agent.SetDestination(finalPosition);
                 _state = States.Roaming;
                 break;
+                
             case States.Roaming:
                 if(agent.velocity.magnitude < 0.15f) _state = States.Waiting;
                 break;
@@ -88,11 +92,12 @@ public class ListenerScript : MonoBehaviour
             case States.Hunting:
                 agent.SetDestination(target.transform.position);
                 PlayAudioClip(screachClip);
-                if (agent.velocity.magnitude < 0.15f)
+                if (Vector3.Distance(agent.transform.position, target.transform.position) < huntDistanceMargin || !isPointReachable(target.transform.position))
                 {
                     _state = States.Waiting;
                     animator.SetBool("Hunting", false);
                     PostProcessing.Instance.effectMaterial.SetFloat("_PulseEffect", 0.0f);
+                    isPlayingHunting = false;
                 }
                 break;
             default:
@@ -152,11 +157,36 @@ public class ListenerScript : MonoBehaviour
 
     public void PlayAudioClip(AudioClip ac)
     {
-        if (!isPlayingAudio)
+        if(_state == States.Hunting && !isPlayingHunting)
+        {
+            AS.PlayOneShot(ac);
+            isPlayingAudio = true;
+            isPlayingHunting = true;
+            audioTimer = 0.0f;
+
+        }
+        else if (!isPlayingAudio)
         {
             AS.PlayOneShot(ac);
             isPlayingAudio = true;
             audioTimer = 0.0f;
+        }
+    }
+
+    public bool isPointReachable(Vector3 position)
+    {
+        var path = new NavMeshPath();
+        agent.CalculatePath(position, path);
+        switch (path.status)
+        {
+            case NavMeshPathStatus.PathComplete:
+                return true;
+            case NavMeshPathStatus.PathPartial:
+                return false;
+            case NavMeshPathStatus.PathInvalid:
+                return false;
+            default:
+                return true;
         }
     }
 }
