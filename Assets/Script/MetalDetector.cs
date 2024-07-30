@@ -9,9 +9,22 @@ namespace Script {
         public AudioClip powerUp;
         private AudioSource AS;
 
+        public float lightDuration;
+        private float counter = 0;
+
+        public Animator powerSwitchAnimator;
         private void Start()
         {
             AS = GetComponent<AudioSource>();
+        }
+
+        private void Update()
+        {
+            counter += Time.deltaTime;
+            if(counter > lightDuration)
+            {
+
+            }
         }
 
         private void OnTriggerEnter(Collider other) {
@@ -29,12 +42,16 @@ namespace Script {
             if (_powered)
             {
                 AS.PlayOneShot(powerUp);
+                powerSwitchAnimator.SetTrigger("TurnOn");
+
             }
             else
             {
                 AS.PlayOneShot(powerDown);
+                powerSwitchAnimator.SetTrigger("TurnOff");
+
             }
-            
+
         }
     }
 }
