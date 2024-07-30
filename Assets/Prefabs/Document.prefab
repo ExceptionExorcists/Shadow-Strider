@@ -340,6 +340,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   disableTextDistance: 5
   textfield: {fileID: 7795075291165674841}
+  textMaterial:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
 --- !u!135 &-8993478356600781103
 SphereCollider:
   m_ObjectHideFlags: 0
