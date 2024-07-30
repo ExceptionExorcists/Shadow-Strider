@@ -1021,14 +1021,6 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9063686526328515431, guid: d2a192a6929281b4d919f817d013bd50, type: 3}
-      propertyPath: MaxDistance
-      value: 15.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9063686526328515431, guid: d2a192a6929281b4d919f817d013bd50, type: 3}
-      propertyPath: rolloffMode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9063686526328515431, guid: d2a192a6929281b4d919f817d013bd50, type: 3}
       propertyPath: rolloffCustomCurve.m_Curve.Array.size
       value: 3
       objectReference: {fileID: 0}
