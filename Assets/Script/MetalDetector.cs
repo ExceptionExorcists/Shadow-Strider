@@ -19,7 +19,7 @@ namespace Script {
 
             _detected = true;
 
-            GameManager.ListenerScript.EnterHuntingState( transform.position, GameManager.PlayerController.gameObject);
+            GameManager.ListenerScript.EnterHuntingState( transform.position, GameManager.PlayerController.gameObject, true);
             AS.Play();
         }
 

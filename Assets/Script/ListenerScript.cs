@@ -33,6 +33,9 @@ public class ListenerScript : MonoBehaviour
 
     public float huntDistanceMargin;
 
+    public bool alarmHunt = false;
+
+    private GameObject damageColliderGO;
     private ListenerScript()
     {
         GameManager.ListenerScript = this;
@@ -45,6 +48,7 @@ public class ListenerScript : MonoBehaviour
         animator = GetComponent<Animator>();
         _state = States.Waiting;
         agent = GetComponent<NavMeshAgent>();
+        damageColliderGO = transform.Find("Damage").gameObject;
     }
 
     // Update is called once per frame
@@ -81,18 +85,24 @@ public class ListenerScript : MonoBehaviour
                 Vector3 finalPosition = hit.position;
                 agent.SetDestination(finalPosition);
                 _state = States.Roaming;
+                damageColliderGO.GetComponent<SphereCollider>().enabled = false;
                 break;
                 
             case States.Roaming:
-                if(agent.velocity.magnitude < 0.15f) _state = States.Waiting;
+                damageColliderGO.GetComponent<SphereCollider>().enabled = false;
+
+                if (agent.velocity.magnitude < 0.15f) _state = States.Waiting;
                 break;
             case States.Investigating:
-                if(agent.velocity.magnitude < 0.15f) _state = States.Waiting;
+                damageColliderGO.GetComponent<SphereCollider>().enabled = true;
+                if (agent.velocity.magnitude < 0.15f) _state = States.Waiting;
                 break;
             case States.Hunting:
+                damageColliderGO.GetComponent<SphereCollider>().enabled = true;
+
                 agent.SetDestination(target.transform.position);
                 PlayAudioClip(screachClip);
-                if (Vector3.Distance(agent.transform.position, target.transform.position) < huntDistanceMargin || !isPointReachable(target.transform.position))
+                if (Vector3.Distance(agent.transform.position, target.transform.position) < huntDistanceMargin || !isPointReachable(target.transform.position) && !alarmHunt)
                 {
                     _state = States.Waiting;
                     animator.SetBool("Hunting", false);
@@ -124,7 +134,7 @@ public class ListenerScript : MonoBehaviour
                 if(radius < huntingRange)
                 {
                     _state = States.Hunting;
-                    EnterHuntingState(position, huntTarget);
+                    EnterHuntingState(position, huntTarget, false);
                 }
                 else
                 {
@@ -137,7 +147,7 @@ public class ListenerScript : MonoBehaviour
                 }
                 break;
             case NoiseStrength.High:
-                EnterHuntingState(position, huntTarget);                
+                EnterHuntingState(position, huntTarget, false);                
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(strength), strength, null);
@@ -145,8 +155,9 @@ public class ListenerScript : MonoBehaviour
 
     }
 
-    public void EnterHuntingState(Vector3 position, GameObject huntTarget)
+    public void EnterHuntingState(Vector3 position, GameObject huntTarget, bool alarm)
     {
+        alarmHunt = alarm;
         animator.SetBool("Hunting", true);
            _state = States.Hunting;
         agent.SetDestination(position);
@@ -157,7 +168,7 @@ public class ListenerScript : MonoBehaviour
 
     public void PlayAudioClip(AudioClip ac)
     {
-        if(_state == States.Hunting && !isPlayingHunting)
+        if(_state == States.Hunting && !isPlayingHunting && isPointReachable(target.transform.position))
         {
             AS.PlayOneShot(ac);
             isPlayingAudio = true;
