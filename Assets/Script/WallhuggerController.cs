@@ -23,6 +23,8 @@ namespace Script {
         private AudioSource AS;
         public float defaultClipDuration;
         private float timer = 0;
+        private int _areaMask = -1;
+        private float _secondsDelay = 0.1f;
 
         private void Awake() {
             switch (id) {
@@ -41,6 +43,7 @@ namespace Script {
         private void Start()
         {
             AS = GetComponent<AudioSource>();
+            //_areaMask = NavMesh.GetAreaFromName("Climbable");
         }
 
         private void Update() {
@@ -67,10 +70,10 @@ namespace Script {
 
             switch (state) {
                 case State.Waiting:
-                    Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * maxRoamingDistance;
-                    NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, maxRoamingDistance, 1);
-                    Vector3 finalPosition = hit.position;
-                    _agent.SetDestination(finalPosition);
+                    Vector3 randomDirection = Random.insideUnitSphere * maxRoamingDistance + transform.position;
+                    if (!NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, maxRoamingDistance, _areaMask)) return;
+                    
+                    _agent.SetDestination(hit.position);
                     state = State.Roaming;
                     break;
                 case State.Roaming:
@@ -80,7 +83,12 @@ namespace Script {
                     if (reachedDestination) state = State.Waiting;
                     break;
                 case State.Hunting:
-                    _agent.SetDestination(_playerTransform.position);
+                    if (_secondsDelay <= 0.0f) {
+                        _agent.SetDestination(_playerTransform.position);
+                        _secondsDelay = 0.1f;
+                    } else {
+                        _secondsDelay -= Time.deltaTime;
+                    }
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

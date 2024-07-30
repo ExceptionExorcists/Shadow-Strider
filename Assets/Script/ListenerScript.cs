@@ -80,7 +80,7 @@ public class ListenerScript : MonoBehaviour
         switch (_state) {
             case States.Waiting:
                 agent.speed = defaultSpeed;
-                Vector3 randomDirection = Random.insideUnitSphere * maxRoamingDistance;
+                Vector3 randomDirection = Random.insideUnitSphere * maxRoamingDistance + transform.position;
                 NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, maxRoamingDistance, 1);
                 Vector3 finalPosition = hit.position;
                 agent.SetDestination(finalPosition);
@@ -113,7 +113,6 @@ public class ListenerScript : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
-        Debug.Log("State: " + _state);
 
         audioTimer += Time.deltaTime;
         if(audioTimer > auidoCooldown)
