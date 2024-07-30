@@ -6115,7 +6115,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7795075291165674841, guid: 9311874dd77bcf643b09d4b2110adb58, type: 3}
       propertyPath: m_text
-      value: Its hunger it greater than its despise for light
+      value: Its hunger is greater than its despise for light
       objectReference: {fileID: 0}
     - target: {fileID: 7795075291165674841, guid: 9311874dd77bcf643b09d4b2110adb58, type: 3}
       propertyPath: m_Enabled
