@@ -591,6 +591,7 @@ MonoBehaviour:
   walkingClip: {fileID: 8300000, guid: 58cdd5991b828f54c9dbbc985363b02e, type: 3}
   clipDuration: 0.4
   listener: {fileID: 0}
+  lightFlickerDuration: 0
 --- !u!114 &7681641207618975952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1043,7 +1044,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 3.87
-  m_Range: 6
+  m_Range: 5
   m_SpotAngle: 91.3
   m_InnerSpotAngle: 1
   m_CookieSize: 10
