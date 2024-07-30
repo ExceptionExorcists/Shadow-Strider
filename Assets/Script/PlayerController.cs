@@ -80,8 +80,8 @@ namespace Script {
             float curSpeedY = walkSpeed * Input.GetAxis("Horizontal");
             
             Vector3 moveDirection = forward * curSpeedX + right * curSpeedY;
-            moveDirection.y = 0.0f;
-            if(moveDirection != Vector3.zero)
+            moveDirection.y -= 1.0f;
+            if(moveDirection.x != 0.0f || moveDirection.z != 0.0f)
             {
                 anim.SetBool("Walking", true);
             }
@@ -94,10 +94,11 @@ namespace Script {
             if (noMovement) return;
 
             _characterController.Move(moveDirection * Time.deltaTime);
+            transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
             timer += Time.deltaTime;
 
-            if (moveDirection != Vector3.zero)
-            { 
+            if (moveDirection.x != 0.0f || moveDirection.z != 0.0f)
+            {
                 _listenerScript.InvestigateArea(transform.position, gameObject, ListenerScript.NoiseStrength.Medium);
                 if (timer > clipDuration)
                 {

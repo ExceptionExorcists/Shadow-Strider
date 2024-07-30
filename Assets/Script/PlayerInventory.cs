@@ -81,13 +81,13 @@ public class PlayerInventory : MonoBehaviour
         {
             case Items.firecracker:
                 GameObject obj_f = Instantiate(firecrackPrefab);
-                obj_f.transform.position = transform.position;
+                obj_f.transform.position = Script.GameManager.PlayerController.transform.position;
                 inventory[currSlot] = Items.empty;
                 break;
 
             case Items.glowstick:
                 GameObject obj_g = Instantiate(glowstickPrefab);
-                obj_g.transform.position = transform.position;
+                obj_g.transform.position = Script.GameManager.PlayerController.transform.position;
                 inventory[currSlot] = Items.empty;
                 break;
 
