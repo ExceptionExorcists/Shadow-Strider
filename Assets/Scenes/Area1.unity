@@ -1045,24 +1045,32 @@ PrefabInstance:
       value: 0.24404645
       objectReference: {fileID: 0}
     - target: {fileID: 9063686526328515431, guid: d2a192a6929281b4d919f817d013bd50, type: 3}
+      propertyPath: rolloffCustomCurve.m_Curve.Array.data[2].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9063686526328515431, guid: d2a192a6929281b4d919f817d013bd50, type: 3}
       propertyPath: rolloffCustomCurve.m_Curve.Array.data[1].inSlope
-      value: -1.3740754
+      value: -0.89322484
       objectReference: {fileID: 0}
     - target: {fileID: 9063686526328515431, guid: d2a192a6929281b4d919f817d013bd50, type: 3}
       propertyPath: rolloffCustomCurve.m_Curve.Array.data[2].inSlope
-      value: -0.55900675
+      value: -0.06493507
       objectReference: {fileID: 0}
     - target: {fileID: 9063686526328515431, guid: d2a192a6929281b4d919f817d013bd50, type: 3}
       propertyPath: rolloffCustomCurve.m_Curve.Array.data[1].outSlope
-      value: -1.3740754
+      value: -0.89322484
       objectReference: {fileID: 0}
     - target: {fileID: 9063686526328515431, guid: d2a192a6929281b4d919f817d013bd50, type: 3}
       propertyPath: rolloffCustomCurve.m_Curve.Array.data[2].inWeight
-      value: 0.19156553
+      value: 0.26587245
       objectReference: {fileID: 0}
     - target: {fileID: 9063686526328515431, guid: d2a192a6929281b4d919f817d013bd50, type: 3}
       propertyPath: rolloffCustomCurve.m_Curve.Array.data[2].outSlope
-      value: -0.55900675
+      value: -0.06493507
+      objectReference: {fileID: 0}
+    - target: {fileID: 9063686526328515431, guid: d2a192a6929281b4d919f817d013bd50, type: 3}
+      propertyPath: rolloffCustomCurve.m_Curve.Array.data[1].outWeight
+      value: 0.19835423
       objectReference: {fileID: 0}
     - target: {fileID: 9063686526328515431, guid: d2a192a6929281b4d919f817d013bd50, type: 3}
       propertyPath: rolloffCustomCurve.m_Curve.Array.data[2].outWeight
@@ -2112,6 +2120,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 9311874dd77bcf643b09d4b2110adb58, type: 3}
+--- !u!95 &484284716 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2793277394303488285, guid: 68f2561844d42ea499c90cf925f3b301, type: 3}
+  m_PrefabInstance: {fileID: 8399020475775956389}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &514523954
 GameObject:
   m_ObjectHideFlags: 0
@@ -7907,6 +7920,10 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0.15
       objectReference: {fileID: 0}
+    - target: {fileID: 8849407916888616643, guid: a301cb8b696637142bda3d85e77f7301, type: 3}
+      propertyPath: powerSwitchAnimator
+      value: 
+      objectReference: {fileID: 484284716}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
