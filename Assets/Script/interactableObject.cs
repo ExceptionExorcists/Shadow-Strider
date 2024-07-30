@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class interactableObject : MonoBehaviour
 {
     public enum Items { empty, firecracker, glowstick }
-
+    
     public UnityEvent interationEvent;
     public bool isInteractable = true;
     public bool isItem;
