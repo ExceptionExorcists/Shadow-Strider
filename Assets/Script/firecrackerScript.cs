@@ -15,7 +15,6 @@ public class firecrackerScript : MonoBehaviour
     public float waitDuration;
     private float timer = 0.0f;
     private Light _light;
-    private NavMeshObstacle _nvMeshObs;
     private AudioSource _as;
 
     
@@ -24,7 +23,6 @@ public class firecrackerScript : MonoBehaviour
     void Start()
     {
         _as = GetComponent<AudioSource>();
-        _nvMeshObs = GetComponent<NavMeshObstacle>();
         _light = transform.GetChild(0).gameObject.GetComponent<Light>();
     }
 
@@ -36,7 +34,6 @@ public class firecrackerScript : MonoBehaviour
 
             if (counter < duration)
             {
-                _nvMeshObs.enabled = true;
 
                 timer += Time.deltaTime;
                 if (!sparking)
@@ -67,7 +64,6 @@ public class firecrackerScript : MonoBehaviour
             else
             {
                 _light.enabled = false;
-                _nvMeshObs.enabled = false;
             }
         }
     }

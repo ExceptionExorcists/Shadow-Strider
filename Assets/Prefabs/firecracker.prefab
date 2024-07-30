@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: -6530652373439247354}
   - component: {fileID: 5199532736411219815}
   - component: {fileID: -7539385306891666751}
-  - component: {fileID: 2183835660729423079}
   - component: {fileID: -2942516588320326706}
   - component: {fileID: -3877131300805715731}
   m_Layer: 0
@@ -214,22 +213,6 @@ CapsuleCollider:
   m_Height: 0
   m_Direction: 1
   m_Center: {x: 0.00000005960464, y: 0, z: -0.00000008940696}
---- !u!208 &2183835660729423079
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3935260123525094406}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 40, y: 1, z: 40}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!114 &-2942516588320326706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,7 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b292a2b5744b91345a221b707fb5e726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 4
+  duration: 10
   particles: {fileID: 8606373247815654667, guid: 63e5740f9486a694e855fd108713c1cf, type: 3}
   sparkDuration: 0.1
   waitDuration: 0.2
